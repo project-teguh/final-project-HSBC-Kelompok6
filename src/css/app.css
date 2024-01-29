@@ -1,0 +1,10 @@
+.mother-container-flex {
+    min-height: 200px;
+    display: flex;
+    width: 100%;
+    padding: 0px 20px;
+    max-width: 1120px;
+    min-width: 1024px;
+    margin: 30px auto auto;
+    align-items: flex-start;
+}
