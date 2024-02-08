@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project</title>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Styling -->
+    <link rel="stylesheet" href="tailwind.css">
+    <!-- Alpine js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+                "hijau" : '#00897B', 
+                "hijau-muda" : '#44C2AC',
+                "grey" : '#D9D9D9', 
+                "stroke" : '#DBEEEC',
+                "abu" : '#A5A5A5'
+        
+          }
+        }
+      }
+    }
+  </script>
+
+</head>
+<body>
+    <nav class="bg-hijau-muda p-0 m-0 flex justify-between py-4 items-center">
+        <div class="flex-col px-4">
+            <a href="#" class="flex font-poppins text-white">Hi, username</a>
+            <a href="#" class="font-bold text-white">Start</a>
+        </div>
+        <div class="border bg-white flex justify-between px-5 text-hijau-muda items-center rounded-3xl w-3/5 h-10 ">
+            <input class="w-full outline-none" type="" placeholder="Mau selamatkan makanan apa hari ini?">
+            <a href=""><img src="../public/icon/search.svg" alt=""></a>
+        </div>
+        <div class="flex gap-4 px-4 items-center">
+            <a href=""><img src="../public/icon/basket.svg" class="w-9" alt=""></a>
+            <a href="#" class="border-2 border-hijau w-28 bg-white rounded-xl p-3 flex justify-center font-poppins font-bold text-hijau items center">Masuk</a>
+            <a href="#" class="border-transparent bg-hijau rounded-xl p-3 w-28 flex justify-center font-poppins font-bold text-white items-center">Daftar</a>
+        </div>
+    </nav>
+    <nav>
+        <div class="bg-stroke rounded-lg px-4 flex justify-between p-1 ">
+            <a href="">Naikkan levelmu disini! Transaksi 0 lagi !</a>
+            <a href="" class="flex gap-2">Atur Lokasi<img src="../public/icon/Vector.svg" alt=""></a>
+        </div>
+    </nav>
+    <section>
+        <!-- caraousel -->
+        <div class="p-4">
+            <div class="max-w-full mx-auto relative " x-data="{
+                activeSlide : 2,
+                slides :[
+                { id: 1, tittle : 'caraousel 1', body :'lorem ipsum dolor sit amet'},
+                { id: 2, tittle : 'caraousel 2', body :'lorem ipsum dolor sit amet'},
+                { id: 3, tittle : 'caraousel 3', body :'lorem ipsum dolor sit amet'},
+                { id: 4, tittle : 'caraousel 4', body :'lorem ipsum dolor sit amet'},
+                { id: 5, tittle : 'caraousel 5', body :'lorem ipsum dolor sit amet'},
+                ]
+            }">
+                <!-- Data loop -->
+                <template x-for="slide in slides" :key="slide.id">
+                    <div x-show="activeSlide === slide.id" class="h-80 flex items-center bg-slate-400 text-white rounded-xl">
+                        <div>
+                            <img src="../public/assets/caraousel.png" x-text="slide.id" class="w-full" alt="">
+                        </div>
+                    </div>
+                </template>
+                <!-- Back & Next -->
+                <div class="absolute inset-0 flex justify-between">
+                    <div 
+                        x-on:click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
+                        class="flex items-center justify-start">
+                        <button class="bg-slate-300 text-slate-500 font-bold rounded-full w-12 h-12 shadow flex justify-center items-center ">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                              </svg>
+                        </button>
+                    </div>
+                    <div 
+                        x-on:click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1"
+                        class="flex items-center justify-end">
+                        <button class="bg-slate-300 text-slate-500 font-bold rounded-full w-12 h-12 shadow flex justify-center items-center ">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                              </svg>
+                              
+                        </button>
+                    </div>
+                </div>
+                <!-- Buttons -->
+                <div class="absolute w-full flex items-center justify-center px-4">
+                    <template x-for="slide in slides" :key="slide.id">
+                        <button class="flex-1 w-4 h-2 mt-4 mx-2 mb-2 rounded-full overflow-hidden transition-colors duration-200 ease-out hover:bg-slate-400 hover:shadow-lg" :class="{
+                            'bg-slate-300' : activeSlide === slide.id,
+                            'bg-slate-200' : activeSlide !== slide.id,
+                        }">
+
+                        </button>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <!-- caaousel end -->
+        <div class="h-60 m-4 border-2 border-grey rounded-xl flex-col items-center">
+            <div class="flex font-poppins font-bold text-lg p-4 justify-between ">
+                <h1>Kategori Pilihan</h1>
+                <h1 class="w-1/2">Top Up & Voucher</h1>
+            </div>
+            <div class="h-44 flex gap-3 items-center p-4  justify-between">
+                <div class="grid-rows-3 text-center">
+                    <a href="">
+                        <img src="../public/assets/orange jus crop.png" class="w-28 rounded-xl">
+                        <h1>minuman</h1>
+                    </a>
+                </div>
+                <div class="grid-rows-3 text-center">
+                    <a href="">
+                        <img src="../public/assets/orange jus crop.png" class="w-28 rounded-xl">
+                        <h1>minuman</h1>
+                    </a>
+                </div>
+                <div class="grid-rows-3 text-center">
+                    <a href="">
+                        <img src="../public/assets/orange jus crop.png" class="w-28 rounded-xl">
+                        <h1>minuman</h1>
+                    </a>
+                </div>
+                <div class="grid-rows-3 text-center">
+                    <a href="">
+                        <img src="../public/assets/orange jus crop.png" class="w-28 rounded-xl">
+                        <h1>minuman</h1>
+                    </a>
+                </div>
+                <div class="grid-rows-3 text-center">
+                    <a href="">
+                        <img src="../public/assets/orange jus crop.png" class="w-28 rounded-xl">
+                        <h1>minuman</h1>
+                    </a>
+                </div>
+                
+                <div class="w-1/2  h-40  border-2 border-grey rounded-2xl flex justify-center items-center">
+                    <div class="flex  w-full justify-between px-9 font-poppins font-semibold text-abu">
+                        <a href="" class="flex w-1/3 items-center"><img src="../public/icon/Coin.svg" alt="" class="w-10">
+                            <div class="p-2">
+                                <h1>Surplus Pay</h1>
+                                <h1 class="font-bold text-hijau">Rp 0</h1>
+                            </div>
+                        </a>
+                        <a href="" class="flex w-1/3 items-center"><img src="../public/icon/voucher.svg" alt="" class="w-10">
+                            <div class="p-2">
+                                <h1>Voucher</h1>
+                                <h1 class="font-bold text-hijau ">5 Voucher</h1>
+                            </div>
+                        </a>
+                        <a href="" class="flex w-1/3 items-center"><img src="../public/icon/Coin.svg" alt="" class="w-10">
+                            <div class="p-2">
+                                <h1>Bonus Coin</h1>
+                                <h1 class="font-bold text-hijau">10 Coin</h1>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main>
+        <div>
+            <div class="flex justify-between px-4 font-poppins items-center">
+                <h1 class="font-bold text-xl">Restoran Terdekat</h1>
+                <button class="border-2 w-24 p-1 rounded-xl bg-hijau-muda border-hijau-muda text-hijau font-bold py-2">Semua</button>
+            </div>
+            <div class="grid grid-cols-5 m-4 gap-2">
+                <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                    <a href="">
+                        <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                        <div>
+                            <div class="p-4">
+                                <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                                <h1 class="font-semibold">Nasi Goreng</h1>
+                                <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                                <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                            </div>
+                            <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                 5.0 | 10x Terjual</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                    <a href="">
+                        <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                        <div>
+                            <div class="p-4">
+                                <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                                <h1 class="font-semibold">Nasi Goreng</h1>
+                                <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                                <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                            </div>
+                            <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                 5.0 | 10x Terjual</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                    <a href="">
+                        <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                        <div>
+                            <div class="p-4">
+                                <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                                <h1 class="font-semibold">Nasi Goreng</h1>
+                                <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                                <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                            </div>
+                            <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                 5.0 | 10x Terjual</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                    <a href="">
+                        <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                        <div>
+                            <div class="p-4">
+                                <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                                <h1 class="font-semibold">Nasi Goreng</h1>
+                                <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                                <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                            </div>
+                            <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                 5.0 | 10x Terjual</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                    <a href="">
+                        <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                        <div>
+                            <div class="p-4">
+                                <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                                <h1 class="font-semibold">Nasi Goreng</h1>
+                                <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                                <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                            </div>
+                            <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                 5.0 | 10x Terjual</h1>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-between px-4 font-poppins items-center">
+                <h1 class="font-bold text-xl">Di Sekitar Kamu</h1>
+                <button class="border-2 w-24 p-1 rounded-xl bg-hijau-muda border-hijau-muda text-hijau font-bold py-2">Semua</button>
+        </div>
+        <div class="grid grid-cols-5 m-4 gap-2">
+            <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                <a href="">
+                    <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                    <div>
+                        <div class="p-4">
+                            <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                            <h1 class="font-semibold">Nasi Goreng</h1>
+                            <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                            <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                        </div>
+                        <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                             5.0 | 10x Terjual</h1>
+                    </div>
+                </a>
+            </div>
+            <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                <a href="">
+                    <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                    <div>
+                        <div class="p-4">
+                            <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                            <h1 class="font-semibold">Nasi Goreng</h1>
+                            <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                            <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                        </div>
+                        <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                             5.0 | 10x Terjual</h1>
+                    </div>
+                </a>
+            </div>
+            <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                <a href="">
+                    <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                    <div>
+                        <div class="p-4">
+                            <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                            <h1 class="font-semibold">Nasi Goreng</h1>
+                            <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                            <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                        </div>
+                        <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                             5.0 | 10x Terjual</h1>
+                    </div>
+                </a>
+            </div>
+            <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                <a href="">
+                    <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                    <div>
+                        <div class="p-4">
+                            <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                            <h1 class="font-semibold">Nasi Goreng</h1>
+                            <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                            <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                        </div>
+                        <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                             5.0 | 10x Terjual</h1>
+                    </div>
+                </a>
+            </div>
+            <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                <a href="">
+                    <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                    <div>
+                        <div class="p-4">
+                            <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                            <h1 class="font-semibold">Nasi Goreng</h1>
+                            <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                            <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                        </div>
+                        <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                            <img src="../public/icon/Star 1.svg" alt="" >
+                             5.0 | 10x Terjual</h1>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <section>
+            <div class="flex justify-center font-poppins font-bold text-2xl p-4 ">
+                <div>
+                    <h1 class="text-hijau">Dampak yang telah dihasilkan</h1>
+                    <h1 class="flex justify-center text-xl text-hijau-muda">#Surplus Hero</h1>
+                </div>    
+            </div>
+            <div class="h-72 m-4 flex justify-between px-11 items-center border-2 border-grey rounded-2xl">
+                <div class="flex items center justify-center relative ">
+                    <a href="" >
+                        <img src="../public/assets/Croissant.png" alt="" class=" w-full ">
+                        <div class="font-poppins font-bold text-lg">
+                            <h1 class="flex justify-center">100.000</h1>
+                            <h1 class="text-base text-abu font-semibold">Makanan terselamatkan</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="flex items-center justify-center ">
+                    <a href="" >
+                        <img src="../public/assets/Trash.png" alt="" class="w-full h-52 ">
+                        <div class="font-poppins font-bold text-lg">
+                            <h1 class="flex justify-center">3.000.300</h1>
+                            <h1 class="text-base text-abu font-semibold">CO2 yang berhasil dicegah</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="flex items center justify-center">
+                    <a href="" >
+                        <img src="../public/assets/Money.png" alt="" class="w-54 h-52">
+                        <div class="font-poppins font-bold text-lg">
+                            <h1 class="flex justify-center">Rp.1.500.000.000</h1>
+                            <h1 class="text-base text-abu font-semibold">Kerugian yang berhasil dicegah</h1>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="flex justify-between px-4 font-poppins items-center">
+                <h1 class="font-bold text-xl">Terlaris hari ini</h1>
+                <button class="border-2 w-24 p-1 rounded-xl bg-hijau-muda border-hijau-muda text-hijau font-bold py-2">Semua</button>
+            </div>
+            <div class="grid grid-cols-5 m-4 gap-2">
+                <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                    <a href="">
+                        <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                        <div>
+                            <div class="p-4">
+                                <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                                <h1 class="font-semibold">Nasi Goreng</h1>
+                                <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                                <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                            </div>
+                            <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                 5.0 | 10x Terjual</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                    <a href="">
+                        <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                        <div>
+                            <div class="p-4">
+                                <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                                <h1 class="font-semibold">Nasi Goreng</h1>
+                                <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                                <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                            </div>
+                            <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                 5.0 | 10x Terjual</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                    <a href="">
+                        <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                        <div>
+                            <div class="p-4">
+                                <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                                <h1 class="font-semibold">Nasi Goreng</h1>
+                                <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                                <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                            </div>
+                            <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                 5.0 | 10x Terjual</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                    <a href="">
+                        <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                        <div>
+                            <div class="p-4">
+                                <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                                <h1 class="font-semibold">Nasi Goreng</h1>
+                                <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                                <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                            </div>
+                            <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                 5.0 | 10x Terjual</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="p-0 font-poppins text-sm border-2 border-grey rounded-xl h-78 ">
+                    <a href="">
+                        <img src="../public/assets/fried-rice-631188_1280.jpg" alt="" class="rounded-xl h-48 w-full">
+                        <div>
+                            <div class="p-4">
+                                <h1 class="text-xs p-0 text-hijau-muda py-2">5 tersedia</h1>
+                                <h1 class="font-semibold">Nasi Goreng</h1>
+                                <h1 class="text-xs py-2">Ambil hari ini, 21.00-22.00</h1>
+                                <h1 class="flex gap-1">50%<span class="line-through">30.000</span>15.000</h1>
+                            </div>
+                            <h1 class="flex bottom-0 h-full px-4 text-xs ">
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                <img src="../public/icon/Star 1.svg" alt="" >
+                                 5.0 | 10x Terjual</h1>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="flex justify-center ">
+                <button class="flex justify-center border-2 w-1/3 border-hijau rounded-2xl font-poppins font-semibold text-hijau p-2">Muat Lebih banyak</button>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
